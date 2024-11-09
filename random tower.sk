@@ -1,0 +1,34 @@
+function startgiveitemloop():
+    if {rt.ison} is true:
+        wait 12 seconds
+        if {rt.ison} is true:
+            send title "&c&l3" with subtitle "" to all players
+            wait 1 second
+            send title "&c&l2" with subtitle "" to all players
+            wait 1 second
+            send title "&c&l1" with subtitle "" to all players
+            wait 1 second
+            send title " " with subtitle "&f아이템이 &7지급되었습니다!" to all players
+            loop all players:
+                set {_amt} to random number between 1 and 3
+                loop {_amt} times:
+                    add 1 of (random element out of all items) to loop-value-1's inventory
+            startgiveitemloop()
+
+
+command /setrtchest:
+    trigger:
+        loop all blocks in the region "random_tower_3":
+            if loop-block is chest:
+                clear (loop-value-1)'s inventory
+                loop 27 times:
+                    add 1 of (random element out of all items) to (loop-value-1)'s inventory
+
+command /startrt:
+    trigger:
+        set {rt.ison} to true
+        startgiveitemloop()
+
+command /stoprt:
+    trigger:
+        set {rt.ison} to false

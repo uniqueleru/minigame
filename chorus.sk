@@ -1,0 +1,26 @@
+command /resetchest:
+    trigger:
+        loop all blocks in the region "chorus_pvp":
+            if loop-block is chest:
+                clear (loop-value-1)'s inventory
+                loop 27 times:
+                    chance of 10%:
+                        add 1 of (random element out of all items) to (loop-value-1)'s inventory
+                    chance of 10%:
+                        add random element out of {chorus.itemlist::*} to (loop-value-1)'s inventory
+                add 64 of chorus fruit to (loop-value-1)'s inventory
+
+
+
+command /setitem:
+    trigger:
+        open chest inventory with 6 row named "템설정" to player
+        loop {chorus.itemlist::*}:
+            set slot (loop-index parsed as number)-1 of current inventory of player to loop-value
+on inventory close:
+    if name of current inventory of player is "템설정":
+        delete {chorus.itemlist::*}
+        loop 54 times:
+            set {_i} to slot (loop-number)-1 of current inventory of player
+            if {_i} is not air:
+                add {_i} to {chorus.itemlist::*}
