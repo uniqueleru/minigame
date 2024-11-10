@@ -1,0 +1,17 @@
+function startgivetntloop():
+    if {tnt.ison} is true:
+        wait 10 seconds
+        if {tnt.ison} is true:
+            loop all players:
+                set {_amt} to random number between 1 and 3
+                give {_amt} of tnt to loop-player's inventory
+                send action bar "&cTNT 지급 완료!" to loop-player
+            startgivetntloop()
+command /starttnt:
+    trigger:
+        set {tnt.ison} to true
+        startgivetntloop()
+
+command /stoptnt:
+    trigger:
+        set {tnt.ison} to false

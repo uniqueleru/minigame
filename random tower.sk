@@ -10,7 +10,7 @@ function startgiveitemloop():
             wait 1 second
             send title " " with subtitle "&f아이템이 &7지급되었습니다!" to all players
             loop all players:
-                set {_amt} to random number between 1 and 3
+                set {_amt} to random number between 1 and 2
                 loop {_amt} times:
                     add 1 of (random element out of all items) to loop-value-1's inventory
             startgiveitemloop()
